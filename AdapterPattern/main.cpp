@@ -39,11 +39,24 @@ public:
     }
 };
 
+class AdapterEx: public IPlayer
+{
+    OldPlayer *_old;
+public:
+    AdapterEx(OldPlayer *old):_old(old){ }
+    void play()
+    {
+        _old->start(100);
+    }
+};
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    
+        
     Adapter *adapter = new Adapter("Mayday", 12);
     adapter->play();
+    
+    OldPlayer *old = new OldPlayer("Mei");
+    AdapterEx *adapterex = new AdapterEx(old);
+    adapterex->play();
     return 0;
 }
